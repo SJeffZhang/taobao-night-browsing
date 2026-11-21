@@ -1,0 +1,25 @@
+{
+  "waterfall": [
+    [
+      "user_item_pairs_with_pv",
+      71015192
+    ],
+    [
+      "t0_after_1d_washout",
+      62913949
+    ],
+    [
+      "complete_24h_outcome_window",
+      53612459
+    ],
+    [
+      "no_fav_cart_buy_before_t0",
+      51316512
+    ]
+  ],
+  "episodes": 51316512,
+  "users": 983132,
+  "items": 3621644,
+  "top1pct_user_event_threshold": 408.0,
+  "top1pct_users": 9878
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "01_hourly_shape",
+    "desc": "Raw and FE-adjusted hourly conversion"
+  },
+  {
+    "name": "02_bin_comparison",
+    "desc": "Primary tests: late & small vs day"
+  },
+  {
+    "name": "03_robustness",
+    "desc": "Robustness checks for late coef"
+  },
+  {
+    "name": "04_cumulative_purchase_by_bin",
+    "desc": "Test-set cumulative purchase by time bin"
+  },
+  {
+    "name": "05_cox_piecewise_hr",
+    "desc": "Cox HRs: 0-24h, 0-1h, 1-24h by time bin"
+  },
+  {
+    "name": "06_causal_forest_gates",
+    "desc": "Causal Forest GATES and CATE distribution"
+  },
+  {
+    "name": "07_survival_hourly",
+    "desc": "PHASE2 A: hourly survival, 1h/3h/24h purchase windows"
+  },
+  {
+    "name": "08_cold_hot_items",
+    "desc": "PHASE2 B: cold vs hot item night loss"
+  }
+]

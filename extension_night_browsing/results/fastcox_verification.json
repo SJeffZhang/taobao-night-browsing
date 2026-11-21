@@ -1,0 +1,26 @@
+{
+  "n": 40000,
+  "events": 395,
+  "distinct_event_times": 189,
+  "vs_statsmodels": {
+    "max_abs_coef_diff": 3.9399594697897555e-12,
+    "loglik_diff": 0.0,
+    "robust_se_ratio_range": [
+      1.000059268036048,
+      1.0000592680398381
+    ]
+  },
+  "stratified_vs_statsmodels": {
+    "max_abs_coef_diff": 5.3577142722360804e-12,
+    "loglik_diff": -9.094947017729282e-13
+  },
+  "no_ties_vs_lifelines_cluster": {
+    "max_abs_coef_diff": 3.372775985466259e-05,
+    "robust_se_ratio_range": [
+      1.0000570632992642,
+      1.0000895784030868
+    ]
+  },
+  "timing_rows": 2586569,
+  "timing_s": 1.4391112327575684
+}

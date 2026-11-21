@@ -1,0 +1,24 @@
+{
+  "feature_mismatches_of_300": {
+    "u_pv_cum": 0,
+    "u_fav_cum": 0,
+    "u_cart_cum": 0,
+    "u_buy_cum": 0,
+    "i_buy24": 0
+  },
+  "split_user_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+  },
+  "split_sizes": {
+    "train": 30774519,
+    "val": 10271057,
+    "test": 10270936
+  },
+  "split_users": {
+    "train": 590074,
+    "val": 196248,
+    "test": 196810
+  }
+}

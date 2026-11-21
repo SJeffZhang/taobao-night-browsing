@@ -1,0 +1,137 @@
+{
+  "raw_rows": 100150807,
+  "null_counts": {
+    "row_no": 0,
+    "user_id": 0,
+    "item_id": 0,
+    "category_id": 0,
+    "behavior": 0,
+    "behavior_raw": 0,
+    "ts": 0
+  },
+  "behavior_raw_values": {
+    "pv": 89716264,
+    "cart": 5530446,
+    "fav": 2888258,
+    "buy": 2015839
+  },
+  "unrecognised_behavior_rows": 0,
+  "distinct_users_raw": 987994,
+  "distinct_items_raw": 4162024,
+  "distinct_categories_raw": 9439,
+  "timestamp": {
+    "min": -2134949234,
+    "max": 2122867355,
+    "min_utc": "1902-05-07 22:32:46+00:00",
+    "max_utc": "2037-04-09 05:22:35+00:00",
+    "min_shanghai": "1902-05-08 06:32:46+08:00",
+    "max_shanghai": "2037-04-09 13:22:35+08:00",
+    "window_definition": "Asia/Shanghai [2017-11-25 00:00, 2017-12-04 00:00)",
+    "window_unix": [
+      1511539200,
+      1512316800
+    ],
+    "rows_in_window": 100095231,
+    "rows_before_window": 53148,
+    "rows_after_window": 2428,
+    "in_window_min_utc": "2017-11-24 16:00:00+00:00",
+    "in_window_max_utc": "2017-12-03 15:59:59+00:00",
+    "out_of_window_by_shanghai_date_top20": {
+      "2017-11-24": 40231,
+      "2017-11-23": 4664,
+      "2017-11-22": 1546,
+      "2017-12-04": 825,
+      "2017-11-21": 743,
+      "2017-11-19": 647,
+      "2017-11-20": 630,
+      "2017-11-03": 562,
+      "2017-11-02": 444,
+      "2017-11-18": 376,
+      "2017-10-02": 341,
+      "2017-11-17": 205,
+      "2017-11-12": 163,
+      "2017-11-14": 149,
+      "2017-11-16": 143,
+      "2017-11-11": 126,
+      "2017-11-15": 115,
+      "2017-12-31": 106,
+      "2017-11-10": 91,
+      "2017-11-04": 89
+    },
+    "in_window_rows_by_shanghai_hour": [
+      3402200,
+      1581628,
+      855227,
+      583954,
+      499706,
+      646085,
+      1366496,
+      2488350,
+      3403016,
+      4182498,
+      4877458,
+      4741809,
+      4771058,
+      5208034,
+      5189882,
+      5365029,
+      5151948,
+      4697671,
+      4795878,
+      6021741,
+      7304809,
+      8369714,
+      8299812,
+      6291228
+    ]
+  },
+  "duplicates_in_window": {
+    "exact_duplicate_rows_extra_copies": 49,
+    "same_user_item_second_different_behavior_adjacent_pairs": 4,
+    "note": "Rows identical on user,item,category,behavior,timestamp are collapsed to one in events_clean; same-second different behaviours are kept and treated as simultaneous (no order is inferred)."
+  },
+  "items_with_multiple_categories": 1405,
+  "clean": {
+    "rows": 100095182,
+    "users": 987991,
+    "items": 4161138,
+    "categories": 9437,
+    "behavior_counts": {
+      "pv": 89660671,
+      "fav": 2888258,
+      "cart": 5530446,
+      "buy": 2015807
+    },
+    "users_with_zero_buy": 315587,
+    "share_users_zero_buy": 0.31942295020906064,
+    "events_per_user_quantiles": {
+      "0": 1.0,
+      "0.01": 8.0,
+      "0.25": 39.0,
+      "0.5": 75.0,
+      "0.75": 136.0,
+      "0.9": 218.0,
+      "0.99": 408.0,
+      "0.999": 573.0,
+      "1": 848.0
+    }
+  },
+  "official_reference": {
+    "rows": 100150807,
+    "users": 987994,
+    "items": 4162024,
+    "categories": 9439,
+    "note": "Aliyun DataWorks help page: 100,150,807 rows, 987,994 users, 4,162,024 items; category count 9,439 is from the Tianchi description as commonly cited (not re-verified online here)."
+  },
+  "matches_official": {
+    "rows": true,
+    "users": true,
+    "items": true
+  },
+  "behavior_code_map": {
+    "pv": 1,
+    "fav": 2,
+    "cart": 3,
+    "buy": 4
+  }
+}

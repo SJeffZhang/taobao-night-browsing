@@ -1,0 +1,28 @@
+{
+  "dataset": "User Behavior Data from Taobao for Recommendation (UserBehavior.csv)",
+  "original_provider": "Alibaba Tianchi, dataset 649",
+  "original_catalog_url": "https://tianchi.aliyun.com/dataset/649",
+  "official_description_used_for_checks": "https://help.aliyun.com/en/dataworks/user-guide/experience-data-analytics-visualization-with-public-datasets",
+  "official_download_status": "NOT obtained directly: tianchi.aliyun.com TLS handshake reset (curl SSL_ERROR_SYSCALL, Python SSLEOFError) on repeated attempts on 2026-10-21; no login/agreement was attempted.",
+  "actual_source": "Public Kaggle mirror (anonymous API download, no account, no terms click-through)",
+  "actual_source_catalog_url": "https://www.kaggle.com/datasets/marwa80/userbehavior",
+  "actual_download_url": "https://www.kaggle.com/api/v1/datasets/download/marwa80/userbehavior (302 to a time-limited signed storage.googleapis.com URL, not recorded)",
+  "mirror_license_label": "Unknown (as listed on Kaggle); original Tianchi terms: research/non-commercial use with citation",
+  "download_started_utc": "2026-10-21T10:18:42Z",
+  "download_finished_utc": "2026-10-21T10:22:24Z",
+  "verified_at_utc": "2026-10-21T13:25:31+00:00",
+  "archive": {
+    "file": "kaggle_marwa80_userbehavior_archive.zip",
+    "bytes": 949807480,
+    "sha256": "0fa6f4a0611113a2a7f6a4f1f5dfd58a4d65aaa65c7cfe98a0edf4b8c3403bee"
+  },
+  "csv": {
+    "file": "UserBehavior.csv",
+    "bytes": 3672347465,
+    "sha256": "46fdd7d389c1ddc7922eb7d9014af5573a4a3045da28c6c46197636873d8f1a9",
+    "zip_crc32": "0a9e6c7e"
+  },
+  "independent_corroboration": "Second public Kaggle mirror https://www.kaggle.com/datasets/haicaochi/userbehavior: ZIP central directory (tail range request only) lists UserBehavior/UserBehavior.csv with identical CRC32 0a9e6c7e; full second copy not downloaded.",
+  "content_checks": "see results/data_audit.json (row count, users, items, categories, behaviour types, time range vs official description)",
+  "citation": "Zhu H. et al. Learning Tree-based Deep Model for Recommender Systems. KDD 2018; Alibaba Tianchi UserBehavior dataset."
+}
