@@ -267,8 +267,6 @@ pip install -r requirements.txt
 │   ├── 06_survival.py         生存分析（Cox M1–M3 / 分段 / Weibull）
 │   ├── 06_verify_fastcox.py   FastCox 对拍 statsmodels/lifelines
 │   ├── 07_figures_advanced.py 图 04–06
-│   ├── 08_build_notebook.py   生成课程 Notebook
-│   ├── 09_execute_notebook.py 执行课程 Notebook
 │   ├── 10_survival_hourly.py  阶段二 A：按小时 × 三窗口
 │   ├── 11_cold_hot_items.py   阶段二 B：冷门 vs 热门
 │   ├── 12_figures_phase2.py   图 07–08
@@ -281,8 +279,7 @@ pip install -r requirements.txt
 │   ├── 19_cf_category.py      带品类的 Causal Forest
 │   └── common.py / adv_common.py / fastcox.py / fig_style.py  公共工具
 ├── notebooks/
-│   ├── full_pipeline.ipynb    单文件完整管线（英文，自包含）
-│   └── night_browsing_analysis.ipynb  课程 Notebook（读结果，不重拟合重活）
+│   └── full_pipeline.ipynb    单文件完整管线（英文，自包含 + 数据审计/验证/对拍）
 ├── figures/                   图 01–11（png/svg）
 ├── results/                   全部结果 CSV/JSON
 ├── data/                      数据来源清单（parquet 数据本身不入库）
