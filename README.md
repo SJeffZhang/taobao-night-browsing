@@ -2,7 +2,7 @@
 
 > **一句话结论**：首次浏览发生在深夜（22–01 时）或凌晨（02–05 时）时，随后 1 小时和 24 小时内的购买率都**显著低于**白天（09–17 时）。数据**不支持**「深夜更容易冲动下单」，**支持**「深夜浏览更像闲逛」——晚上看了、最后大多不买。
 
-本仓库是 IS5312（Analytical Programming with Python）课程项目，用天池 649「淘宝 UserBehavior」公开数据，完整走一遍「**数据清洗 → 建模 → 可视化**」，回答一个反直觉的电商问题：**深夜流量到底值不值得买？**
+本仓库是 IS5312（Analytical Programming with Python）课程项目，用[天池 649「淘宝 UserBehavior」](https://tianchi.aliyun.com/dataset/649)公开数据，完整走一遍「**数据清洗 → 建模 → 可视化**」，回答一个反直觉的电商问题：**深夜流量到底值不值得买？**
 
 ---
 
@@ -48,7 +48,7 @@
 
 ## 数据
 
-- **来源**：天池 649「淘宝 UserBehavior」公开镜像，共 **100,150,807 条原始事件**（清洗后 100,095,182 条），上海时区 2017-11-25 至 12-03（9 天）。
+- **来源**：[天池 649「淘宝 UserBehavior」](https://tianchi.aliyun.com/dataset/649)，共 **100,150,807 条原始事件**（清洗后 100,095,182 条），上海时区 2017-11-25 至 12-03（9 天）。
 - **字段**：只有 `user_id / item_id / category_id / behavior(pv·fav·cart·buy) / timestamp`，**没有价格、停留时长、心理标签**。
 - **分析单位**：不是 1 亿条独立样本，而是「用户—商品」的**首次可见浏览 episode**：`t0` = 该用户第一次浏览该商品的时刻。共 **51,316,512 个 episode、983,132 名用户**。
 - **结果变量**：`Y1` = 1 小时内购买（基线 0.65%）、`Y2` = 24 小时内购买（0.98%）。
@@ -236,7 +236,7 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 pip install -r requirements.txt
 ```
 
-**数据**：唯一的数据依赖是一份原始的 `UserBehavior.csv`（100,150,807 行，~3.67 GB，来源见 `data/source_manifest.json`）。
+**数据**：唯一的数据依赖是一份原始的 `UserBehavior.csv`（100,150,807 行，~3.67 GB），下载自 [天池 649](https://tianchi.aliyun.com/dataset/649)（下载与校验细节见 `data/source_manifest.json`）。
 
 **两条路径：**
 
