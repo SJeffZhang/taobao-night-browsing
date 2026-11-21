@@ -1,0 +1,13 @@
+14:53:24 load
+14:54:21 M0_full n 51316512 30s
+14:54:32 M0_main n 10226231 5s
+14:54:39 M1_main n 10225602 7s
+14:57:41 M2_main n 9348719 182s
+15:00:23 M2_replication n 9391169 161s
+15:02:14 S1_no_controls n 9348719 111s
+15:04:57 S2_session n 9348719 164s
+15:06:44 S5_washout72 n 6529725 106s
+15:09:17 S6_excl_top1 n 8873696 153s
+15:11:28 Y3_deferred_given_no_1h n 9282560 130s
+15:20:52 M2_hour_shape n 9348719 563s
+15:20:52 done

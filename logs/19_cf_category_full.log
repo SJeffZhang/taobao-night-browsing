@@ -1,0 +1,11 @@
+16:21:39 load + category map
+16:23:00 features 26 | top categories [4756105, 2355072, 4145813, 982926, 3607361] ...
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+16:27:11 rounds y 239 t 1368
+17:13:58 cf fit 2806 s
+17:17:52 val ate -0.17509462532246314 blp beta 1.102
+17:22:12 test ate -0.1806260267082252 blp beta 1.258 q5-q1 0.393
+17:22:12 done 3552.0 s

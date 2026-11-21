@@ -1,0 +1,28 @@
+21:34:10 train 19509321 val 6502143
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+21:37:20 rounds y 163 t 1200
+22:21:03 cf fit 2622 s
+22:23:00 val ate {'coef': -0.17395284486950982, 'se': 0.009060520006772958, 'ci': [-0.19171146408278483, -0.1561942256562348], 'clusters': 193577} blp beta 1.098673546773134
+22:24:59 test ate {'coef': -0.1810144966143058, 'se': 0.00906938205366961, 'ci': [-0.19879048543949823, -0.16323850778911336], 'clusters': 194123} blp beta 1.2605347260104507 q5-q1 {'diff': 0.3909191446142213, 'se': 0.030924593311835884, 'ci': [0.33030694172302294, 0.4515313475054196]}
+22:24:59 done 3053 s
+     3054.64 real     18245.31 user       901.14 sys
+         22132834304  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+           242580376  page reclaims
+                 174  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              125410  voluntary context switches
+            64085712  involuntary context switches
+      89667251537133  instructions retired
+      77583593530948  cycles elapsed
+         55447107616  peak memory footprint

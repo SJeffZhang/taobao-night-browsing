@@ -1,0 +1,27 @@
+21:08:30 train 19509321 val 6502143
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+/Users/zhangshijie/Desktop/course/IS5312 Analy. Programming with Python/group submit/taobao_user_behavior/extension_night_browsing/vendor/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+21:11:46 rounds y 163 t 1200
+time: command terminated abnormally
+     1428.72 real      4381.38 user      1857.72 sys
+         16448094208  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+           175275224  page reclaims
+                1732  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              880879  voluntary context switches
+            95978879  involuntary context switches
+      31522674437472  instructions retired
+      25983715832061  cycles elapsed
+        115242095960  peak memory footprint
+/Users/zhangshijie/anaconda3/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 2 leaked semaphore objects to clean up at shutdown: {'/loky-40386-715pg87p', '/loky-40386-g0jr08b2'}
+  warnings.warn(

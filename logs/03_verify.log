@@ -1,0 +1,27 @@
+15:02:21 check n 80610 0s
+{
+  "start_anchor": "2017-11-25T00:00:00+08:00",
+  "rebuild": {
+    "users": 400,
+    "pipeline_episodes": 21133,
+    "reference_episodes": 21133,
+    "only_one_side": 0,
+    "field_mismatches": {
+      "buy_delay_s": 0,
+      "hour": 0,
+      "day": 0,
+      "hist_pv24": 0,
+      "hist_pv1h": 0,
+      "hist_buy24": 0,
+      "t0": 0
+    },
+    "buys_within_24h": 247
+  },
+  "pop24_mismatches_of_300": 0,
+  "fe_vs_dummies": {
+    "n": 80610,
+    "max_abs_coef_diff": 1.4913070778277415e-13,
+    "se_ratio_min": 0.999999999999752,
+    "se_ratio_max": 1.0000000000002187
+  }
+}

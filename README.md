@@ -1,44 +1,87 @@
-# 淘宝深夜浏览分析（Taobao Night Browsing）
+# Taobao: night browsing — idle browsing or impulse buying? (IS5312 lead project)
 
-天池 649（淘宝 UserBehavior）公开镜像：**深夜浏览到底是「冲动消费」还是「闲逛」？**
+Read [FINDINGS_zh.md](FINDINGS_zh.md) first (Chinese).
 
-核心结论：数据不支持「深夜更容易冲动下单」，支持「深夜浏览更像闲逛」——深夜（22–01）与凌晨（02–05）浏览的即时与 24 小时购买率都显著低于白天（09–17）。
+**TL;DR**: First views at 22–01 and 02–05 convert less than daytime views (09–17), both within 1 h and within 24 h.
 
-## 项目结构
+- **Fixed-effects LPM:** late vs day −0.18 pp on 1 h purchase and −0.31 pp on 24 h purchase.
+- **Cox, 30.8 M train episodes:** late-night HR 0.71.
+  - Late night: the hazard stays lower after the first hour (HR 0.63 for 1–24 h), so it is fewer purchases, not just later ones.
+  - Small hours: only the first hour is lower (1–24 h HR 0.98, CI includes 1), so purchases are mainly delayed.
+- **Causal Forest (test ATE −0.18 pp):**
+  - Real heterogeneity: BLP β 1.26, GATES Q5−Q1 +0.39 pp.
+  - It is mostly scale. The absolute gap is largest for long-tail items and users who already bought, while the relative gap is −17% to −26% in every quintile.
 
-- `extension_night_browsing/` —— 完整分析项目（主分析 + 阶段二两个子分析 + 品类扩展）
-  - `notebooks/full_pipeline.ipynb` —— **单文件整合**：数据清理 → 建模/实验 → 图片可视化
-  - `notebooks/night_browsing_analysis.ipynb` —— 课程 Notebook（英文，读取已保存结果）
-  - `slides/night_browsing_midterm_zh.pptx` —— 中期汇报 PPT（18 页）
-  - `web/analysis_zh.html` —— 单文件网页版报告
-  - `results/` —— 全部结果 CSV/JSON；`figures/` —— 图 01–11
-  - `FINDINGS_zh.md` / `FINDINGS_PHASE2_zh.md` —— 中文发现；`ANALYSIS_PLAN*.md` + `POST_PLAN_DEVIATIONS.md` —— 预设计划与偏离记录
-- `data/source_manifest.json` —— 数据来源与校验（原始 CSV 的下载地址、sha256 等）
-- `results/data_audit.json` —— 原始数据的审计（行数、时间窗、行为类型、重复等）
-- `src/common.py` + `vendor/pyhdfe/` —— 固定效应吸收的共享依赖
+## Pipeline
 
-## 方法
+All scripts are in `src/`. Run them from inside `src/`. Use Python 3.13.9. Install dependencies with `pip install -r requirements.txt` (the fixed-effects and ML libraries were previously vendored and are now pinned in this file).
 
-固定效应线性概率模型（FE-LPM，用户/商品/日期三层 FE，双向聚类 SE）、生存分析（自实现 FastCox，Breslow 结点 + Lin-Wei 聚类 SE）、Causal Forest（CausalForestDML），以及按小时 × 三窗口生存、冷门/热门商品、分品类等扩展。
+| Step | Script | Output | Time / peak RAM |
+|---|---|---|---|
+| 1 | `01_build.py` | `data/episodes_hour.parquet` (51.3 M first-view episodes) | 6.5 min |
+| 2 | `02_models.py` | FE models, 4 Holm tests, 7 robustness specs, hour shape | 27 min |
+| 3 | `03_verify.py` | 400-user independent rebuild, FE vs dummies | 2 min |
+| 4 | `04_figures.py` | figures 01–03 | <1 min |
+| 5 | `05_features.py` | `data/episodes_features.parquet` (adds pre-t0 user/item counts) | 2 min |
+| 6 | `05_verify_features.py` | 300-episode feature recount, split overlap check | 1 min |
+| 7 | `06_verify_fastcox.py` | FastCox vs statsmodels / lifelines | 1 min |
+| 8 | `06_survival.py --tag full` | Cox M1–M3, piecewise Cox, Weibull AFT, cumulative curves | 12 min / 17 GB |
+| 9 | `05_causal_forest.py --tag full` | CausalForestDML, test ATE / BLP / GATES / CLAN | 51 min / 22 GB |
+| 10 | `07_figures_advanced.py` | figures 04–06 | <1 min |
+| 11 | `08_build_notebook.py` | `notebooks/night_browsing_analysis.ipynb` (unexecuted) | <1 min |
+| 12 | `09_execute_notebook.py` | executes the notebook in a fresh kernel, exports `.html`, writes `notebooks/execution_audit.json` | ~3 min / ~10 GB |
+| 13 | `10_survival_hourly.py --tag full` | PHASE2 A: survival with one group per hour × three purchase windows (1h/3h/24h) (`results/survival_hourly_*.csv/json`) | ~8 min |
+| 14 | `11_cold_hot_items.py` | PHASE2 B: cold vs hot item night loss (`results/cold_hot_items_*.csv`) | ~3 min |
+| 15 | `12_figures_phase2.py` | figures 07–08 | <1 min |
+| 16 | `13_build_slides_zh.py` | `slides/night_browsing_midterm_zh.pptx` (18 slides, Chinese, CityU-style) | <1 min |
+| 17 | `14_build_web.py` | `web/analysis_zh.html` (single-file report, images embedded) | <1 min |
+| 18 | `17_category_survival.py --tag full` | PHASE2 A-by-category: Cox per top-20 category + other (`results/category_survival_*.csv`) | ~8 min |
+| 19 | `18_figure_category.py` | figure 11 | <1 min |
+| 20 | `19_cf_category.py --tag full` | Causal Forest with category dummies (`results/causal_forest_category_full.json`) | ~60 min / 22 GB |
 
-## Data（重要）
+Steps 13–15 are PHASE2 sub-analyses; steps 16–17 build the deliverable deck and web report; steps 18–19 add the category-stratified survival analysis (plan: `ANALYSIS_PLAN_PHASE2.md`, findings: `FINDINGS_PHASE2_zh.md`). The course notebook (step 12) predates them and was not updated to include them.
 
-本仓库**不包含数据文件**（`.parquet` 已在 `.gitignore`）。原始数据是公开数据集，约 3.67 GB CSV：
+The course notebook reads saved results and does not refit the survival models or the Causal Forest. It re-computes live, and asserts equal to the saved files, three things: the full descriptives, the primary M2 FE model, and the test-set cumulative purchase curves.
 
-- 下载地址与校验：`data/source_manifest.json`
-- 原始数据审计：`results/data_audit.json`
+Set `OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2` before running.
 
-重跑需要以下 parquet 数据文件（由原始 CSV 派生）：
+Notes on steps 8 and 9:
 
-| 文件 | 说明 |
+- `--tag smoke` with small bucket ranges writes to `results/smoke/` instead.
+- The Causal Forest default `--max_samples 0.05` is required on this machine. The econml default of 0.45 pre-allocates about 70 GB of subsample indices (see `POST_PLAN_DEVIATIONS.md`).
+
+## Splits
+
+Users are split by md5 bucket. A user appears in exactly one split, verified with 0 overlap.
+
+- **Train, buckets 0–59:** 30.8 M episodes, 590 k users.
+- **Validation, buckets 60–79:** 10.3 M episodes. Used only for LightGBM early stopping and dev checks.
+- **Test, buckets 80–99:** 10.3 M episodes, 197 k users. All reported Causal Forest and C-index results come from this split.
+
+The fixed-effects analysis predates this split. It used buckets 40–59 as its main sample and 60–79 for replication.
+
+## Data
+
+The large parquet data files are **not tracked** in this repository (see `.gitignore`). They derive from the public Tianchi 649 / Kaggle mirror dataset (download URL + sha256 in `data/source_manifest.json`; raw-data audit in `results/data_audit.json`).
+
+| File | Produced by |
 |---|---|
-| `data/processed/events_clean.parquet` | 清洗后事件表（1 亿行，时间窗过滤 + 去重） |
-| `data/processed/user_buckets.parquet` | 用户 md5 分桶（训练/验证/测试划分） |
-| `extension_night_browsing/data/episodes_hour.parquet` | 首次浏览 episode 表（由 `01_build.py` 生成） |
-| `extension_night_browsing/data/episodes_features.parquet` | 带处理前特征的 episode 表（由 `05_features.py` 生成） |
+| `data/processed/events_clean.parquet` | cleaned 100 M events (time-window filter + dedup) |
+| `data/processed/user_buckets.parquet` | user md5 buckets (train/val/test split) |
+| `data/episodes_hour.parquet` | `01_build.py` |
+| `data/episodes_features.parquet` | `05_features.py` |
 
-## 环境与运行
+## Notebooks
 
-- Python 3.13.9（anaconda）；运行前 `OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2`
-- 依赖：numpy / pandas / scipy / statsmodels / matplotlib + vendored `pyhdfe` / `lightgbm` / `econml` / `lifelines`（`vendor/`）
-- 完整管线见 `extension_night_browsing/README.md`；整合版 `extension_night_browsing/notebooks/full_pipeline.ipynb` 从头到尾可读，重活用 `TAG='smoke'`（自检）/ `'full'`（全量）切换
+- `notebooks/full_pipeline.ipynb` — the consolidated single-file pipeline (data cleaning → models → figures), English.
+- `notebooks/night_browsing_analysis.ipynb` — the course notebook (reads saved results; does not refit the survival models or the Causal Forest).
+
+## Plans and disclosure
+
+- `ANALYSIS_PLAN.md` was saved before the FE results. `ANALYSIS_PLAN_ADVANCED.md` v2 was saved before the Causal Forest and survival results. Neither is externally registered.
+- `POST_PLAN_DEVIATIONS.md` records every deviation:
+  - the Cox implementation swap;
+  - a column-name bug fixed after the smoke run;
+  - the memory-driven `max_samples` change;
+  - the smoke run touching test bucket 80;
+  - two corrected statements in an earlier version of the findings.

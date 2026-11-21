@@ -1,0 +1,2 @@
+time,footprint_gb,rss_gb,swap_used_mb,swap_free_mb,free_pct,cpu_pct
+21:32:42,process_exited

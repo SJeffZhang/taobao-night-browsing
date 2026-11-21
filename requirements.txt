@@ -1,0 +1,24 @@
+# Core analysis stack
+numpy==2.3.5
+pandas==2.3.3
+scipy==1.16.3
+statsmodels==0.14.5
+matplotlib==3.10.6
+pyarrow==21.0.0
+
+# Fixed effects + advanced methods (previously vendored; pinned to the exact versions used)
+pyhdfe==0.2.1
+econml==0.17.0
+lightgbm==4.7.0
+lifelines==0.30.3
+
+# Notebook build / execution
+nbformat==5.10.4
+nbclient==0.10.2
+nbconvert==7.16.6
+ipython==9.7.0
+ipykernel==6.31.0
+
+# Slides (src/13_build_slides_zh.py)
+python-pptx
+Pillow==12.0.0

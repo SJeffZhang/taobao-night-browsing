@@ -1,0 +1,26 @@
+20:53:26 train 30774519 events 308698 strata 700
+20:53:33 M1_bins n 30774519 events 308698 iter 3 6s late HR 0.685
+20:54:06 M2_controls n 30774519 events 308698 iter 4 33s late HR 0.7054
+20:54:23 M3_stratified n 30774519 events 308698 iter 4 17s late HR 0.7032
+20:54:53 PW_0_1h n 30774519 events 208290 iter 4 28s late HR 0.741
+20:55:20 PW_1h_24h n 30566229 events 100408 iter 3 24s late HR 0.6348
+21:04:52 aft 572 s
+21:04:59 done 709 s {'M1_bins': 0.5377383019633228, 'M2_controls': 0.6240532089292802}
+      710.84 real       824.79 user       354.94 sys
+         17075519488  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+           140357851  page reclaims
+                  87  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                1180  voluntary context switches
+             2458447  involuntary context switches
+      12237498907954  instructions retired
+       5018216373942  cycles elapsed
+         51523873200  peak memory footprint
