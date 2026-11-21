@@ -75,13 +75,3 @@ The large parquet data files are **not tracked** in this repository (see `.gitig
 
 - `notebooks/full_pipeline.ipynb` — the consolidated single-file pipeline (data cleaning → models → figures), English.
 - `notebooks/night_browsing_analysis.ipynb` — the course notebook (reads saved results; does not refit the survival models or the Causal Forest).
-
-## Plans and disclosure
-
-- `ANALYSIS_PLAN.md` was saved before the FE results. `ANALYSIS_PLAN_ADVANCED.md` v2 was saved before the Causal Forest and survival results. Neither is externally registered.
-- `POST_PLAN_DEVIATIONS.md` records every deviation:
-  - the Cox implementation swap;
-  - a column-name bug fixed after the smoke run;
-  - the memory-driven `max_samples` change;
-  - the smoke run touching test bucket 80;
-  - two corrected statements in an earlier version of the findings.
