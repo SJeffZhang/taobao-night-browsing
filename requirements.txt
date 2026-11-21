@@ -5,6 +5,7 @@ scipy==1.16.3
 statsmodels==0.14.5
 matplotlib==3.10.6
 pyarrow==21.0.0
+tqdm==4.67.1
 
 # Fixed effects + advanced methods (previously vendored; pinned to the exact versions used)
 pyhdfe==0.2.1
