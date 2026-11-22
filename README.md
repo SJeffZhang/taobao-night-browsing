@@ -56,13 +56,13 @@
 
 下面这张图展示了「1 亿行原始操作 → 5,131 万条 episode」是怎么压出来的：
 
-![一行数据长什么样](figures/09_data_rows.png)
+![一行数据长什么样](figures/paper/09_data_rows.png)
 
 > 注：约 40% 的购买在 9 天窗口内没有任何前置浏览/收藏/加购记录，进不了 episode，所以结论只覆盖「**先浏览、后购买**」这条路径。
 
 商品是高度长尾的（9,439 个匿名品类），前 12 个品类只占少部分事件：
 
-![品类长尾分布](figures/10_categories.png)
+![品类长尾分布](figures/paper/10_categories.png)
 
 ---
 
@@ -116,7 +116,7 @@ M2 主模型（940 万 episode），系数单位是百分点（pp），参照白
 
 白天参照组均值 Y1=0.75%、Y2=1.12%，所以深夜相对低约 24%–27%，凌晨低约 20%–32%。
 
-![主检验：深夜/凌晨 vs 白天](figures/02_bin_comparison.png)
+![主检验：深夜/凌晨 vs 白天](figures/paper/02_bin_comparison.png)
 
 **「谁在深夜逛」只解释一小部分。** 逐层加固定效应看深夜 Y1 系数的变化：
 
@@ -126,11 +126,11 @@ M2 主模型（940 万 episode），系数单位是百分点（pp），参照白
 
 **7 项预设稳健性全部保持负号、CI 不含 0**（去控制变量、加会话强度、10 分钟窗口、换聚类、72h 洗出、剔重度用户、复现样本）：
 
-![稳健性：深夜系数在 7 种规格下都显著为负](figures/03_robustness.png)
+![稳健性：各模型规格的深夜系数与置信区间](figures/paper/03_robustness.png)
 
 **小时形状**（M2，参照 14 时）：Y1 最低在 02 时（−0.28 pp），Y2 最低在 23 时（−0.37 pp），10 时最高。白天整体居高、夜间偏低，但不是对称 U 形：
 
-![原始 vs FE 调整后的小时转化](figures/01_hourly_shape.png)
+![原始 vs FE 调整后的小时转化](figures/paper/01_hourly_shape.png)
 
 ### 5.2 生存分析：深夜是「不买」，凌晨是「晚买」
 
@@ -145,11 +145,11 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 - **深夜**：两段 HR 都显著 <1，1 小时后的 HR 反而**更低** → 不只是「晚点买」，而是「买得更少」。
 - **凌晨**：0–1h 显著低，1–24h 的 CI 包含 1 → 主要是「**推迟购买**」。
 
-![分段 Cox 风险比](figures/05_cox_piecewise_hr.png)
+![分段 Cox 风险比](figures/paper/05_cox_piecewise_hr.png)
 
 测试集累计购买曲线（24h 累计：白天 1.16%、深夜 0.80%、凌晨 0.85%）。深夜曲线在 1–6h 几乎平坦（用户在睡觉），之后也**一直没有追平**白天；凌晨曲线在 6–24h 追赶：
 
-![测试集累计购买曲线](figures/04_cumulative_purchase_by_bin.png)
+![测试集累计购买曲线](figures/paper/04_cumulative_purchase_by_bin.png)
 
 > 预测力：M2 的 C-index 仅 0.624（只放时段的 M1 为 0.538）——时段只解释购买时间的一小部分，本分析目的是**比较时段**，不是做预测。
 
@@ -164,7 +164,7 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 | GATES Q5 − Q1 | **+0.39**（0.33, 0.45） |
 | 预测 CATE 为负的比例 | 99.9% |
 
-![GATES 与 CATE 分布](figures/06_causal_forest_gates.png)
+![GATES 与 CATE 分布](figures/paper/06_causal_forest_gates.png)
 
 解读：异质性真实存在，但**主要是规模效应**——在本来就容易购买的场景（冷门长尾商品、已经买过东西的用户）里，深夜损失的绝对百分点最大。按相对幅度看，各组都比白天低约 17%–26%，**不存在「某类人深夜反而更爱买」的子群**。森林最依赖的特征是「商品过去 24h 浏览热度」（重要性 0.54）。
 
@@ -172,7 +172,7 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 
 按小时 × 三个窗口（1h / 3h / 24h）跑 Cox（参照 14 时）：
 
-![按小时 × 三窗口的购买风险与累计购买](figures/07_survival_hourly.png)
+![按小时 × 三窗口的购买风险与累计购买](figures/paper/07_survival_hourly.png)
 
 - **上午 09–11 点最能买**：10 点三个窗口 HR 1.08 / 1.09 / 1.13，24h 累计 1.269% 全天最高。
 - **21–23 点是「不买」**：23 点 24h HR 0.629、24h 累计 0.681%，都是全天最低。
@@ -181,7 +181,7 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 
 ### 5.5 阶段二 B：冷门 vs 热门商品的深夜损失
 
-![冷门 vs 热门商品的夜间损失](figures/08_cold_hot_items.png)
+![冷门 vs 热门商品的夜间损失](figures/paper/08_cold_hot_items.png)
 
 - 白天转化率随热度单调下降：Y1 从最冷档 **1.10%** 降到最热档 **0.42%**（冷门「看了就买」，热门「围观多、买得少」）。
 - 深夜绝对损失随热度缩小：**−0.44 pp → −0.08 pp**。
@@ -191,7 +191,7 @@ Cox 风险比（HR，训练集 3,077 万 episode）：
 
 对前 20 大品类 + 「其他」分别重跑生存分析，21 组深夜 24h HR **全部 <1**（0.58–0.81），说明「深夜买得少」不是某几个品类的特例，而是普遍现象：
 
-![分品类的深夜购买风险比](figures/11_category_night_penalty.png)
+![分品类的深夜购买风险比](figures/paper/11_category_night_penalty.png)
 
 带品类特征的 Causal Forest 测试集 ATE 仍是 −0.181 pp，且品类特征的总重要性 ≈ 0（6.5e-5）——品类本身不改变结论。
 
@@ -280,7 +280,8 @@ pip install -r requirements.txt
 │   └── common.py / adv_common.py / fastcox.py / fig_style.py  公共工具
 ├── notebooks/
 │   └── full_pipeline.ipynb    单文件完整管线（英文，自包含 + 数据审计/验证/对拍）
-├── figures/                   图 01–11（png/svg）
+├── figures/
+│   └── paper/                 README 图 01–11（PDF、SVG、PNG）
 ├── results/                   全部结果 CSV/JSON
 ├── data/                      数据来源清单（parquet 数据本身不入库）
 ├── slides/                    中期汇报 PPT
